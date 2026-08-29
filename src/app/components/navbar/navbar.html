@@ -1,0 +1,25 @@
+<header class="navbar">
+  <!-- Izquierda: Logo -->
+  <a routerLink="/" class="navbar__logo">
+    <span class="logo-text">ikama</span>
+  </a>
+
+  <!-- Centro: Navegación -->
+  <nav class="navbar__center">
+    <p-button label="Cómo funciona" [text]="true" severity="secondary" />
+    <p-button label="FAQs" [text]="true" severity="secondary" />
+  </nav>
+
+  <!-- Derecha: Perfil -->
+  <div class="navbar__right">
+    <p-button 
+      icon="pi pi-user" 
+      [rounded]="true" 
+      [text]="true" 
+      styleClass="profile-btn" 
+      severity="secondary"
+      aria-label="Perfil de usuario"
+      (onClick)="openProfileModal()" 
+    />
+  </div>
+</header>

@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.scss */
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+/* Importación de iconos de PrimeNG */
+@import 'primeicons/primeicons.css';
+
+:root {
+  /* --- PALETA BASE --- */
+  --dark-coffee: #362417;
+  --dusty-taupe: #947f6b;
+  --almond-cream: #f1dabf;
+  --snow: #fffbff;
+  
+  /* Primary */
+  --c-primary: var(--dark-coffee);
+  --c-primary-hover: #4a3321;
+  
+  /* Fondos */
+  --c-bg-main: var(--snow);
+  --c-bg-surface: var(--almond-cream);
+  --c-bg-hover: #f9ede0;
+  
+  /* Textos */
+  --c-text-main: var(--dark-coffee);
+  --c-text-muted: var(--dusty-taupe);
+  --c-text-button-primary: var(--snow);
+  
+  /* Bordes */
+  --c-border-main: #d3c4b7;
+  --c-border-focus: var(--dusty-taupe);
+  --c-border-light: var(--almond-cream);
+}
+
+/* Reseteo básico opcional para asegurar consistencia */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Rubik', sans-serif;
+  color: var(--c-text-main);
+  background-color: var(--c-bg-main);
+}
