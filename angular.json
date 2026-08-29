@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "icama_frontend": {
+    "ikama_frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -70,10 +70,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "icama_frontend:build:production"
+              "buildTarget": "ikama_frontend:build:production"
             },
             "development": {
-              "buildTarget": "icama_frontend:build:development"
+              "buildTarget": "ikama_frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
