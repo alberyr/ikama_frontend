@@ -1,0 +1,119 @@
+<div class="login-form">
+  
+  <form [formGroup]="authForm" novalidate>
+    @switch (currentStep()) {
+      
+      <!-- PASO 1: validar email -->
+      @case ('email') {
+        <div class="login-form__header">
+          <h3>Bienvenido a ikama</h3>
+          <p class="subtitle">Inicia sesión o regístrate</p>
+        </div>
+        <div class="login-form__inputs">
+          <input 
+            type="email" 
+            pInputText 
+            formControlName="email" 
+            placeholder="Correo electrónico" 
+            (keydown.enter)="onEmailSubmit()"
+          />
+          <!-- Modificado: Solo aparece si hay texto y el formato es erróneo -->
+          @if (f.email.errors?.['email'] && f.email.value && f.email.dirty && f.email.touched) {
+            <small class="error-msg">El formato del correo no es válido.</small>
+          }
+        </div>
+        <p-button 
+          [label]="isLoading() ? '' : 'Continuar'" 
+          styleClass="w-full auth-btn" 
+          [loading]="isLoading()"
+          (onClick)="onEmailSubmit()" 
+        />
+      }
+
+      <!-- PASO 2A: iniciar sesión (ya existe una cuenta) -->
+      @case ('login-password') {
+        <div class="login-form__header back-header">
+          <p-button icon="pi pi-chevron-left" [text]="true" [rounded]="true" (onClick)="goBack('email')" />
+          <h3>Iniciar sesión</h3>
+        </div>
+        
+        <div class="login-form__inputs">
+          <input type="text" pInputText [value]="f.email.value" disabled class="disabled-input" />
+          
+          <p-password 
+            formControlName="password" 
+            [toggleMask]="true" 
+            [feedback]="false"
+            placeholder="Contraseña"
+            (keydown.enter)="onLoginSubmit()"
+          />
+          @if (f.password.errors?.['invalid']) {
+            <small class="error-msg">Contraseña incorrecta.</small>
+          }
+        </div>
+        <p-button 
+          [label]="isLoading() ? '' : 'Iniciar sesión'"
+          styleClass="w-full auth-btn" 
+          [loading]="isLoading()"
+          (onClick)="onLoginSubmit()" 
+        />
+      }
+
+      <!-- PASO 2B: verificar código (nuevo usuario) -->
+      @case ('verify-code') {
+        <div class="login-form__header back-header">
+          <p-button icon="pi pi-chevron-left" [text]="true" [rounded]="true" (onClick)="goBack('email')" />
+          <h3>Confirma tu correo</h3>
+        </div>
+        
+        <div class="login-form__inputs">
+          <input type="text" pInputText [value]="f.email.value" disabled class="disabled-input" />
+        </div>
+        
+        <p class="subtitle">Hemos enviado un código de 6 cifras a tu correo.</p>
+        
+        <div class="login-form__inputs otp-container">
+          <p-inputOtp formControlName="code" [length]="6" styleClass="custom-otp" />
+          @if (f.code.errors?.['invalid']) {
+            <small class="error-msg">El código debe tener 6 cifras.</small>
+          }
+        </div>
+        <p-button 
+          [label]="isLoading() ? '' : 'Verificar'" 
+          styleClass="w-full auth-btn" 
+          [loading]="isLoading()"
+          (onClick)="onVerifyCode()" 
+        />
+      }
+
+      <!-- PASO 3B: completar registro (nuevo usuario) -->
+      @case ('set-password') {
+        <div class="login-form__header">
+          <h3>Crea tu cuenta</h3>
+          <p class="subtitle">Último paso</p>
+        </div>
+        <div class="login-form__inputs">
+          <input type="text" pInputText [value]="f.email.value" disabled class="disabled-input" />
+          <p-password 
+            formControlName="password" 
+            [toggleMask]="true" 
+            [feedback]="false"
+            placeholder="Contraseña"
+            (keydown.enter)="onRegisterSubmit()"
+          />
+          @if (f.password.errors?.['invalid']) {
+            <small class="error-msg">
+              La contraseña debe tener al menos 8 caracteres, incluyendo letra, número y símbolo
+            </small>
+          }
+        </div>
+        <p-button 
+          [label]="isLoading() ? '' : 'Completar registro'"
+          styleClass="w-full auth-btn" 
+          [loading]="isLoading()"
+          (onClick)="onRegisterSubmit()" 
+        />
+      }
+    }
+  </form>
+</div>

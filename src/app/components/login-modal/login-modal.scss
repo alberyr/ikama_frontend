@@ -1,0 +1,188 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    margin-bottom: 2rem;
+    text-align: center;
+
+    h3 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--c-text-main);
+    }
+
+    span {
+      display: block;
+      color: var(--c-text-muted); /* Color gris suave para el subtítulo */
+      font-size: 0.95rem;
+    }
+    
+    /* Respetamos la estructura original para cuando hay botón de atrás */
+    &.back-header {
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      h3 {
+        margin: 0;
+      }
+    }
+  }
+
+  .subtitle {
+    margin: 0 0 1.25rem 0;
+    color: var(--c-text-muted);
+    font-size: 0.95rem;
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+
+    /* Estilos compartidos para todos los inputs básicos */
+    input.p-inputtext,
+    input[type="email"],
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--c-border-main);
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--c-text-main);
+      
+      &:focus {
+        border-color: var(--c-border-focus);
+        box-shadow: none;
+        outline: none;
+      }
+
+      &.disabled-input, &:disabled {
+        background-color: var(--c-bg-surface);
+        color: var(--c-text-muted);
+        cursor: not-allowed;
+        opacity: 1;
+      }
+    }
+    
+    .error-msg {
+      color: #d32f2f;
+      font-size: 0.75rem;
+      margin-top: 0.2rem;
+    }
+  }
+
+  .otp-container {
+    align-items: center;
+    margin-top: 0.5rem;
+
+    /* SOLUCIÓN OTP: Convertimos el componente host de PrimeNG en el contenedor flex */
+    ::ng-deep p-inputotp {
+      display: flex;
+      gap: 0.75rem; /* Separación clara entre los 6 cuadrados */
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* SOLUCIÓN OTP: Estilamos directamente los inputs hijos sobreescribiendo tu regla global */
+    ::ng-deep .p-inputotp-input {
+      width: 3rem !important; /* Importante para anular el width: 100% de tus inputs globales */
+      height: 3.5rem;
+      font-size: 1.5rem;
+      text-align: center;
+      padding: 0 !important; /* Importante para anular el padding: 0.75rem de tus inputs globales */
+      margin: 0;
+      border-radius: 8px;
+      border: 1.5px solid var(--c-border-main) !important;
+      background-color: var(--c-bg-main);
+      
+      &:focus {
+        border-color: var(--c-border-focus) !important;
+        box-shadow: 0 0 0 1px var(--c-border-focus) !important;
+        outline: none;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .auth-btn {
+    width: 100%;
+    justify-content: center;
+    background-color: var(--c-primary) !important;
+    border: none !important;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 1rem;
+		color: var(--c-text-button-primary) !important;
+
+    &:hover {
+      background-color: var(--c-primary-hover) !important;
+    }
+  }
+
+  /* 1. Ajustes para la contraseña y su icono */
+  .p-password {
+    width: 100%;
+    position: relative; /* Fundamental para contener el icono absoluto */
+    display: block;
+
+    input.p-inputtext {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      padding-right: 2.75rem; /* Espacio para que el texto no pise el ojo */
+      border-radius: 8px;
+      border: 1px solid var(--c-border-main);
+      
+      &:focus {
+        border-color: var(--c-border-focus);
+      }
+    }
+
+    /* Posicionamiento del icono del ojo dentro del input */
+    .p-password-toggle-mask-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--c-text-muted);
+      cursor: pointer;
+      width: 1.2rem;
+      height: 1.2rem;
+
+      &:hover {
+        color: var(--c-text-main);
+      }
+    }
+  }
+  
+  /* 2. Ajustes para el campo OTP (Bordes remarcados y separados) */
+  .custom-otp {
+    display: flex;
+    gap: 0.75rem; /* Separación clara entre los 6 cuadrados */
+    justify-content: center;
+
+    .p-inputtext {
+      width: 3rem;
+      height: 3.5rem;
+      font-size: 1.5rem;
+      text-align: center;
+      margin: 0;
+      border-radius: 8px;
+      border: 1.5px solid var(--c-border-main) !important; /* Borde más grueso y forzado */
+      background-color: var(--c-bg-main);
+      
+      &:focus {
+        border-color: var(--c-border-focus) !important;
+        box-shadow: 0 0 0 1px var(--c-border-focus) !important; /* Resalte al estar activo */
+        outline: none;
+      }
+    }
+  }
+}
