@@ -14,6 +14,10 @@
   /* Primary */
   --c-primary: var(--dark-coffee);
   --c-primary-hover: #4a3321;
+
+  /* Secondary */
+  --c-secondary: var(--dusty-taupe);
+  --c-secondary-hover: #a89a8a;
   
   /* Fondos */
   --c-bg-main: var(--snow);
@@ -24,6 +28,7 @@
   --c-text-main: var(--dark-coffee);
   --c-text-muted: var(--dusty-taupe);
   --c-text-button-primary: var(--snow);
+  --c-text-button-secondary: var(--snow);
   
   /* Bordes */
   --c-border-main: #d3c4b7;
@@ -89,4 +94,113 @@ body {
     // border-bottom-left-radius: 10px !important;
     // border-bottom-right-radius: 10px !important;
   }
+}
+
+/* --- ESTILOS DEL PANEL FLOTANTE DE P-SELECT --- */
+.p-select-overlay {
+  background-color: var(--c-bg-main) !important;
+  border: 1px solid var(--c-border-main) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  overflow: hidden; /* Evita que el fondo de las opciones sobresalga por las esquinas redondeadas */
+}
+
+/* Cabecera del buscador interno */
+.p-select-header {
+  background-color: var(--c-bg-main) !important;
+  padding: 0.75rem !important;
+  border-bottom: 1px solid var(--c-border-light) !important;
+  
+  /* Contenedor del input y la lupa */
+  .p-iconfield {
+    position: relative;
+    display: block;
+
+    /* El input de búsqueda */
+    .p-select-filter {
+      width: 100%;
+      /* Padding: arriba derecha abajo izquierda (dejamos hueco a la lupa) */
+      padding: 0.6rem 0.75rem 0.6rem 2.25rem !important; 
+      border-radius: 6px !important;
+      border: 1px solid var(--c-border-main) !important;
+      font-family: inherit;
+      color: var(--c-text-main) !important;
+    }
+
+    /* La lupa encuadrada */
+    .p-inputicon {
+      position: absolute;
+      left: 0.75rem; /* Separación del borde izquierdo */
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--c-text-muted);
+      width: 1rem;
+      height: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+  }
+}
+
+/* Opciones de la lista */
+.p-select-option {
+  padding: 0.75rem 1rem !important;
+  color: var(--c-text-main) !important;
+  background-color: transparent !important;
+  font-family: inherit;
+
+  /* Estado Hover y Foco al navegar con teclado */
+  &:hover, &.p-focus {
+    background-color: var(--c-bg-hover) !important;
+  }
+
+  /* Estado Seleccionado */
+  &.p-select-option-selected {
+    background-color: var(--almond-cream) !important;
+    color: var(--c-primary) !important;
+    font-weight: 600;
+  }
+}
+
+.p-slider {
+  background-color: var(--c-border-main) !important; /* Pista de fondo */
+  height: 6px !important;
+  border: none !important;
+
+  /* Relleno de la barra hasta el valor seleccionado */
+  .p-slider-range {
+    background-color: var(--c-primary) !important;
+  }
+
+  /* El círculo arrastrable */
+  .p-slider-handle {
+    border: 2px solid var(--c-primary) !important;
+    background-color: var(--c-bg-main) !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    margin-top: -0.4rem !important; /* Centrado vertical respecto a los 6px de la barra */
+    border-radius: 50% !important;
+    transition: background-color 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      background-color: var(--c-bg-hover) !important;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px var(--almond-cream) !important;
+    }
+  }
+}
+
+::placeholder {
+  color: var(--c-text-muted) !important;
+  opacity: 1 !important; /* Firefox aplica una opacidad reducida por defecto, esto lo normaliza */
+}
+
+/* 2. Componentes que usan un span simulando un placeholder (como p-select) */
+.p-placeholder,
+.p-select-label.p-placeholder {
+  color: var(--c-text-muted) !important;
 }

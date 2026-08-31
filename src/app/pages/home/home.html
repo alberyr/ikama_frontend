@@ -1,0 +1,56 @@
+<main class="home-layout">
+  
+  <!-- COLUMNA IZQUIERDA -->
+  <section class="home-left">
+    
+    <!-- Cuadrante superior -->
+    <div class="home-left__top">
+      <h1>Alquiler para funcionarios.<br><span>Sin papeleos, con garantía legal</span></h1>
+    </div>
+
+    <!-- Cuadrante inferior -->
+    <div class="home-left__bottom">
+      <p-button 
+        label="Soy propietario" 
+        icon="pi pi-home" 
+        styleClass="owner-btn" 
+        (onClick)="openLanding('propietario')"
+      />
+      <p-button 
+        label="Soy inquilino" 
+        icon="pi pi-briefcase" 
+        [outlined]="true" 
+        styleClass="tenant-btn" 
+        (onClick)="openLanding('inquilino')"
+      />
+    </div>
+
+  </section>
+
+  <!-- COLUMNA DERECHA -->
+  <section class="home-right">
+    
+    <!-- Cuadrante derecho -->
+    <div class="guarantees-card">
+      <h2>Alquila con seguridad</h2>
+      
+      <div class="steps-timeline">
+        @for (step of processSteps; track step.title) {
+          <div class="step-item">
+            <!-- Icono del paso -->
+            <div class="step-icon">
+              <i [class]="step.icon"></i>
+            </div>
+            <!-- Contenido del paso -->
+            <div class="step-content">
+              <h4>{{ step.title }}</h4>
+              <p>{{ step.desc }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+  </section>
+
+</main>
