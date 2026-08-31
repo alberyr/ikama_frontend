@@ -1,0 +1,25 @@
+<main class="page-layout">
+  <header class="page-header">
+    <h1>Preguntas <span>frecuentes</span></h1>
+    <p>Resolvemos tus dudas sobre el alquiler temporal para empleados públicos.</p>
+  </header>
+
+  <div class="faq-container">
+    @for (cat of faqCategories; track cat.title; let catIdx = $index) {
+      <div class="faq-category">
+        <h2>{{ cat.title }}</h2>
+        
+        <p-accordion [multiple]="true">
+          @for (faq of cat.items; track faq.q; let itemIdx = $index) {
+            <p-accordion-panel [value]="catIdx + '-' + itemIdx">
+              <p-accordion-header>{{ faq.q }}</p-accordion-header>
+              <p-accordion-content>
+                <p>{{ faq.a }}</p>
+              </p-accordion-content>
+            </p-accordion-panel>
+          }
+        </p-accordion>
+      </div>
+    }
+  </div>
+</main>

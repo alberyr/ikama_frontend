@@ -1,0 +1,26 @@
+<main class="page-layout">
+  <header class="page-header">
+    <h1>El proceso es <span>cero estrés</span></h1>
+    <p>Tanto si ofreces tu vivienda como si te acaban de destinar a una nueva ciudad, nosotros nos ocupamos de la burocracia.</p>
+  </header>
+
+  <div class="steps-grid">
+    @for (step of steps; track step.num) {
+      <div class="step-card">
+        <div class="step-card__num">{{ step.num }}</div>
+        <h2>{{ step.title }}</h2>
+        
+        <div class="step-card__split">
+          <div class="split-box tenant-box">
+            <h4><i class="pi pi-briefcase"></i> Si eres funcionario</h4>
+            <p>{{ step.tenant }}</p>
+          </div>
+          <div class="split-box owner-box">
+            <h4><i class="pi pi-home"></i> Si eres propietario</h4>
+            <p>{{ step.owner }}</p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</main>

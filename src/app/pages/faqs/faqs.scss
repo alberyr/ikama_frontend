@@ -1,0 +1,78 @@
+.page-layout {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 4rem;
+
+  h1 {
+    font-size: 3rem;
+    color: var(--c-text-main);
+    margin-bottom: 1rem;
+    span { color: var(--dusty-taupe); }
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: var(--c-text-muted);
+  }
+}
+
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.faq-category {
+  h2 {
+    font-size: 1.5rem;
+    color: var(--c-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--almond-cream);
+  }
+}
+
+/* --- OVERRIDES PRIMENG ACCORDION V18 --- */
+::ng-deep {
+  .p-accordionpanel {
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--c-border-light) !important;
+    border-radius: 8px !important;
+    overflow: hidden;
+    background-color: var(--snow) !important;
+  }
+
+  .p-accordionheader {
+    background-color: var(--snow) !important;
+    color: var(--c-text-main) !important;
+    font-weight: 600;
+    padding: 1.25rem !important;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--almond-cream) !important;
+    }
+  }
+
+  .p-accordionpanel-active .p-accordionheader {
+    background-color: var(--almond-cream) !important;
+    color: var(--c-primary) !important;
+  }
+
+  .p-accordioncontent-content {
+    background-color: var(--snow) !important;
+    color: var(--c-text-muted) !important;
+    line-height: 1.6;
+    padding: 1.25rem !important;
+    border-top: 1px solid var(--c-border-light);
+
+    p {
+      margin: 0;
+    }
+  }
+}
