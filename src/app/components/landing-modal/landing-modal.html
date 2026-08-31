@@ -1,0 +1,109 @@
+<div class="login-form">
+  <div class="login-form__header">
+    <h3>Únete a la lista de espera</h3>
+    <p class="subtitle">Déjanos tus datos y te avisaremos en el lanzamiento</p>
+  </div>
+
+  <form [formGroup]="landingForm" novalidate class="login-form__content">
+    
+		<!-- 1. Nombre -->
+    <div class="input-group">
+      <input type="text" pInputText formControlName="name" placeholder="Nombre" />
+      @if (f.name.errors?.['required'] && f.name.touched) {
+        <small class="error-msg">El nombre es obligatorio</small>
+      }
+    </div>
+
+    <!-- 2. Email -->
+    <div class="input-group">
+      <input type="email" pInputText formControlName="email" placeholder="Correo electrónico" />
+      
+      @if (f.email.errors?.['pattern'] && f.email.touched) {
+        <small class="error-msg">Introduce un formato de correo válido</small>
+      }
+      @if (f.email.errors?.['required'] && f.email.touched) {
+        <small class="error-msg">El correo es obligatorio</small>
+      }
+    </div>
+
+    <!-- 3. Botones de Selección -->
+    <div class="role-selection">
+      <p-button 
+        label="Soy propietario" 
+        icon="pi pi-home"
+        (onClick)="selectRole('propietario')"
+        [styleClass]="role() === 'propietario' ? 'w-full role-btn selected_owner' : 'w-full role-btn'"
+      />
+      <p-button 
+        label="Soy inquilino" 
+        icon="pi pi-briefcase"
+        (onClick)="selectRole('inquilino')"
+        [styleClass]="role() === 'inquilino' ? 'w-full role-btn selected_tenant' : 'w-full role-btn'"
+      />
+    </div>
+
+    <!-- 4. Campos Expandidos -->
+    @if (role() !== null) {
+      <div class="expanded-fields">
+        
+        <div class="input-group">
+          <label class="input-label">
+            {{ role() === 'propietario' ? 'Provincia en la que ofreces alojamiento' : 'Provincia en la que buscas alojamiento' }}
+          </label>
+          <p-select 
+            formControlName="province" 
+            [options]="provincias" 
+            optionLabel="nombre" 
+            optionValue="nombre"
+            [filter]="true" 
+            filterBy="nombre" 
+            placeholder="Selecciona una provincia..."
+            styleClass="w-full"
+            [virtualScroll]="true" 
+            [virtualScrollItemSize]="38"
+            appendTo="body" 
+					/>
+        </div>
+
+				<!-- @if (role() === 'inquilino') {
+          <div class="input-group slider-group">
+            <div class="slider-header">
+              <label class="input-label">Distancia máxima al centro de trabajo</label>
+              <span class="slider-value">{{ f.distance.value }} km</span>
+            </div>
+            <p-slider 
+              formControlName="distance" 
+              [min]="0" 
+              [max]="50" 
+              styleClass="w-full" 
+            />
+          </div>
+        } -->
+
+        <div class="input-group">
+          <label class="input-label">
+            {{ role() === 'propietario' ? 'Precio por el que se ofrece' : 'Precio máximo dispuesto a pagar' }}
+          </label>
+          <p-inputNumber 
+            formControlName="price" 
+            mode="currency" 
+            currency="EUR" 
+            locale="es-ES" 
+            placeholder="400€" 
+            styleClass="w-full"
+          />
+        </div>
+
+      </div>
+    }
+
+    <!-- 5. Botón Enviar -->
+    <p-button 
+      [label]="isLoading() ? '' : 'Continuar'" 
+      styleClass="w-full auth-btn" 
+      [loading]="isLoading()"
+      [disabled]="landingForm.invalid || !role()"
+      (onClick)="onSubmit()" 
+    />
+  </form>
+</div>

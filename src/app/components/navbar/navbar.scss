@@ -1,37 +1,89 @@
-/* src/app/components/navbar/navbar.scss */
-
 .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2.5rem;
-  background-color: var(--c-bg-main);
+  height: 60px;
+  background-color: var(--snow);
   border-bottom: 1px solid var(--c-border-light);
   position: sticky;
   top: 0;
   z-index: 100;
 
-  &__logo {
-    flex: 1; /* Ocupa el espacio disponible para centrar el bloque del medio */
-    color: var(--c-primary);
+  &__container {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__brand {
     text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 700;
+    
+    .brand-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--c-primary);
+      letter-spacing: -0.03em;
+    }
   }
 
-  &__center {
+  &__links {
     display: flex;
-    gap: 2.5rem;
-    justify-content: center;
-  }
+    align-items: center;
+    gap: 2rem;
 
-  &__right {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
+    .nav-link {
+      text-decoration: none;
+      color: var(--c-text-muted);
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--c-text-main);
+      }
+
+      /* Estado activo de la ruta seleccionada */
+      &.active {
+        color: var(--c-primary);
+        font-weight: 600;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background-color: var(--c-primary);
+          border-radius: 2px;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      display: none; /* Oculta los enlaces en móvil para mantener la barra limpia */
+    }
   }
 }
 
-::ng-deep .profile-btn .p-button-icon {
-  font-size: 1.5rem;
+::ng-deep {
+  .nav-btn {
+    background-color: var(--c-primary) !important;
+    border: none !important;
+    padding: 0.6rem 1.25rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    color: var(--snow) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+
+    &:hover {
+      background-color: var(--c-primary-hover) !important;
+    }
+  }
 }

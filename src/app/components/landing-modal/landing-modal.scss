@@ -1,0 +1,249 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  
+  &__header {
+    margin-bottom: 2rem;
+    text-align: center;
+    h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--c-text-main);
+    }
+  }
+
+  .subtitle {
+    margin: 0;
+    color: var(--c-text-muted);
+    font-size: 0.95rem;
+  }
+
+  /* Contenedor principal para mantener 1.5rem exactos entre cada sección */
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+/* Agrupación individual de cada campo y su etiqueta */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  .input-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--c-text-main);
+  }
+
+  .error-msg {
+    color: #d32f2f;
+    font-size: 0.75rem;
+  }
+}
+
+.role-selection {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  
+  /* PrimeNG genera un host <p-button> que necesita flex: 1 para ocupar la mitad del hueco */
+  p-button {
+    flex: 1;
+  }
+}
+
+.expanded-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Misma separación que el resto del formulario */
+  animation: fadeInDown 0.3s ease forwards;
+}
+
+.slider-group {
+  margin-top: 0.5rem;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem; /* Recupera y aumenta un poco la separación con la barra */
+
+  .input-label {
+    margin: 0;
+  }
+
+  .slider-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--c-primary);
+    background-color: var(--c-bg-surface);
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+  }
+}
+
+/* --- OVERRIDES PRIMENG --- */
+::ng-deep {
+  
+  /* 1. Inputs normales y numéricos */
+  .p-inputtext:not(.p-select-filter),
+  .p-inputnumber-input {
+    width: 100%;
+    padding: 0.75rem 1rem !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--c-border-main) !important;
+    font-size: 1rem !important;
+    font-family: inherit;
+    color: var(--c-text-main) !important;
+    background-color: var(--c-bg-main) !important;
+    
+    &:focus {
+      border-color: var(--c-border-focus) !important;
+      box-shadow: 0 0 0 1px var(--c-border-focus) !important;
+      outline: none;
+    }
+  }
+
+  /* 2. Contenedor principal del select (solo bordes y fondo) */
+  .p-select {
+    width: 100%;
+    border-radius: 8px !important;
+    border: 1px solid var(--c-border-main) !important;
+    background-color: var(--c-bg-main) !important;
+    
+    /* El texto del select */
+    .p-select-label {
+      padding: 0.75rem 1rem !important;
+      font-size: 1rem !important;
+      color: var(--c-text-main) !important;
+      font-family: inherit;
+    }
+
+    /* Encuadre de la flecha de despliegue */
+    .p-select-dropdown {
+      width: 2.75rem;
+      color: var(--c-text-muted);
+    }
+
+    &.p-focus {
+      border-color: var(--c-border-focus) !important;
+      box-shadow: 0 0 0 1px var(--c-border-focus) !important;
+    }
+  }
+
+	.p-slider {
+    background-color: var(--c-border-main) !important;
+    height: 6px !important;
+    border: none !important;
+    
+    /* Ajustar el slider con los márgenes del formulario */
+    width: calc(100% - 1.25rem) !important;
+    margin: 0 auto !important;
+
+    .p-slider-range {
+      background-color: var(--c-primary) !important;
+    }
+
+    .p-slider-handle {
+      border: 2px solid var(--c-primary) !important;
+      background-color: var(--c-bg-main) !important;
+      width: 1.25rem !important;
+      height: 1.25rem !important;
+      
+      /* Centrado vertical y horizontal */
+      top: 50% !important;
+      margin-top: 0 !important;
+      margin-left: -0.625rem !important;
+      transform: translateY(-50%) !important;
+      
+      border-radius: 50% !important;
+      transition: background-color 0.2s, box-shadow 0.2s;
+
+      &:hover {
+        background-color: var(--c-bg-hover) !important;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 3px var(--almond-cream) !important;
+      }
+    }
+  }
+
+  /* Botones de Propietario / Inquilino */
+  .role-btn {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 0;
+    border-radius: 8px;
+    font-weight: 400;
+    border: none !important;
+    background-color: var(--snow) !important;
+    transition: all 0.2s ease;
+
+    /* Color base (cuando no están seleccionados) */
+    color: var(--c-text-main) !important;
+    .p-button-icon, .p-button-label {
+      color: var(--c-text-main) !important;
+      transition: all 0.2s ease;
+    }
+
+    /* ESTADO PROPIETARIO */
+    &.selected_owner {
+      background-color: var(--c-primary) !important;
+      
+      color: var(--snow) !important;
+      .p-button-icon, .p-button-label {
+        color: var(--snow) !important;
+        font-weight: 400;
+      }
+    }
+
+    /* ESTADO INQUILINO */
+    &.selected_tenant {
+      background-color: var(--c-secondary) !important;
+      
+      color: var(--snow) !important;
+      .p-button-icon, .p-button-label {
+        color: var(--snow) !important;
+        font-weight: 400;
+      }
+    }
+
+    &:hover:not(.selected_owner):not(.selected_tenant) {
+      background-color: var(--c-bg-hover) !important;
+    }
+  }
+
+  /* Botón de enviar */
+  .auth-btn {
+    width: 100%;
+    justify-content: center;
+    background-color: var(--c-primary) !important;
+    border: none !important;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--snow) !important;
+
+    &:hover:not(:disabled) {
+      background-color: var(--c-primary-hover) !important;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

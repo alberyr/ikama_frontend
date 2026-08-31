@@ -1,25 +1,36 @@
 <header class="navbar">
-  <!-- Izquierda: Logo -->
-  <a routerLink="/" class="navbar__logo">
-    <span class="logo-text">ikama</span>
-  </a>
+  <div class="navbar__container">
+    
+    <!-- Logotipo con enlace a la Home -->
+    <a routerLink="/" class="navbar__brand">
+      <span class="brand-name">ikama</span>
+    </a>
 
-  <!-- Centro: Navegación -->
-  <nav class="navbar__center">
-    <p-button label="Cómo funciona" [text]="true" severity="secondary" />
-    <p-button label="FAQs" [text]="true" severity="secondary" />
-  </nav>
+    <!-- Enlaces de Navegación -->
+    <nav class="navbar__links">
+      <a 
+        routerLink="/como-funciona" 
+        routerLinkActive="active" 
+        class="nav-link">
+        Cómo funciona
+      </a>
+      <a 
+        routerLink="/faqs" 
+        routerLinkActive="active" 
+        class="nav-link">
+        Preguntas frecuentes
+      </a>
+    </nav>
 
-  <!-- Derecha: Perfil -->
-  <div class="navbar__right">
-    <p-button 
-      icon="pi pi-user" 
-      [rounded]="true" 
-      [text]="true" 
-      styleClass="profile-btn" 
-      severity="secondary"
-      aria-label="Perfil de usuario"
-      (onClick)="openProfileModal()" 
-    />
+    <!-- Botón de Acción -->
+    <div class="navbar__actions">
+      <p-button 
+        label="Apúntate" 
+        icon="pi pi-sparkles" 
+        styleClass="nav-btn" 
+        (onClick)="openProfileModal()" 
+      />
+    </div>
+
   </div>
 </header>
