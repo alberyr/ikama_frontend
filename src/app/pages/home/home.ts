@@ -41,7 +41,7 @@ export class Home {
       closeOnEscape: true,
       draggable: false,
       resizable: false,
-      focusOnShow: true,
+      focusOnShow: false,
       data: { role }
     });
   }

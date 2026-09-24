@@ -1,5 +1,8 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
+import { LandingService, LandingPayload } from '../../services/landing';
+
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -9,7 +12,7 @@ import { SliderModule } from 'primeng/slider';
 
 import { PROVINCIAS } from '../../shared/constants/provincias.constant';
 
-type UserRole = 'propietario' | 'inquilino' | null;
+type UserRole = 'Roomer' | 'Owner' | null;
 
 @Component({
   selector: 'app-landing-modal',
@@ -29,9 +32,11 @@ export class LandingModal implements OnInit {
   private dialogRef = inject(DynamicDialogRef);
   private config = inject(DynamicDialogConfig);
   private fb = inject(NonNullableFormBuilder);
+  private waitlistService = inject(LandingService);
 
   readonly role = signal<UserRole>(null);
   readonly isLoading = signal(false);
+  readonly isSuccess = signal(false);
   
   readonly provincias = PROVINCIAS;
 
@@ -49,14 +54,14 @@ export class LandingModal implements OnInit {
       Validators.required, 
       Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
     ]],
-    province: [''], 
+    province: ['', [Validators.required]], 
     // distance: [15],
-    price: [null as number | null]
+    price: [null as number | null, [Validators.required, Validators.min(1)]]
   });
 
   get f() { return this.landingForm.controls; }
 
-  selectRole(selectedRole: 'propietario' | 'inquilino'): void {
+  selectRole(selectedRole: 'Owner' | 'Roomer'): void {
     this.role.set(selectedRole);
     
     // Validadores base para ambos
@@ -77,17 +82,32 @@ export class LandingModal implements OnInit {
     // this.f.distance.updateValueAndValidity();
   }
 
-  onSubmit(): void {
+  async onSubmit() {
     if (this.landingForm.invalid || !this.role()) {
       this.landingForm.markAllAsTouched();
       return;
     }
 
     this.isLoading.set(true);
-    setTimeout(() => {
+
+    // Mapeamos los datos del formulario a la interfaz que espera el backend
+    const payload: LandingPayload = {
+      firstName: this.landingForm.value.name!,
+      email: this.landingForm.value.email!,
+      userType: this.role()!,
+      city: this.landingForm.value.province!,
+      // distance: this.landingForm.value.distance || undefined,
+      price: this.landingForm.value.price!
+    };
+
+    try {
+      // Lanzamos la petición POST
+      await firstValueFrom(this.waitlistService.joinWaitlist(payload));
+      this.isSuccess.set(true);
+    } catch (error) {
+      console.error('Error al conectar con Spring Boot:', error);
+    } finally {
       this.isLoading.set(false);
-      console.log('Lead capturado:', { ...this.landingForm.getRawValue(), role: this.role() });
-      this.dialogRef.close();
-    }, 1000);
+    }
   }
 }

@@ -199,8 +199,8 @@ body {
   opacity: 1 !important; /* Firefox aplica una opacidad reducida por defecto, esto lo normaliza */
 }
 
-/* 2. Componentes que usan un span simulando un placeholder (como p-select) */
-.p-placeholder,
-.p-select-label.p-placeholder {
+p-select .p-select-label.p-placeholder,
+.p-select .p-select-label.p-placeholder,
+.p-select.p-component .p-select-label.p-placeholder {
   color: var(--c-text-muted) !important;
 }

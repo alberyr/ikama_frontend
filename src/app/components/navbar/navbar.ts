@@ -38,7 +38,7 @@ export class Navbar {
       closeOnEscape: true,
       draggable: false,
       resizable: false,
-      focusOnShow: true
+      focusOnShow: false
     });
   }
 }
