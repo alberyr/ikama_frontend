@@ -4,7 +4,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   min-height: calc(100vh - 60px); /* Ajusta los 60px según el alto del navbar */
-  padding: 4rem 2rem;
+  padding: 1rem 2rem 0rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
   align-items: center; /* Centra el contenido verticalmente */
@@ -44,6 +44,12 @@
       line-height: 1.6;
       margin: 0;
       max-width: 90%;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 3rem;
+      }
     }
   }
 
@@ -158,6 +164,10 @@
     &:hover {
       background-color: var(--c-primary-hover) !important;
     }
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
   }
 
   .tenant-btn {
@@ -171,6 +181,10 @@
     
     &:hover {
       background-color: var(--c-secondary-hover) !important;
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
     }
   }
 }

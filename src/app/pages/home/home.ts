@@ -35,6 +35,9 @@ export class Home {
   openLanding(role: 'propietario' | 'inquilino'): void {
     this.dialogService.open(LandingModal, {
       width: '28rem',
+      breakpoints: {
+        '640px': '95vw'
+      },
       modal: true,
       dismissableMask: true,
       closable: true,

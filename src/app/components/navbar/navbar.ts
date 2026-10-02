@@ -32,6 +32,9 @@ export class Navbar {
     this.dialogService.open(LandingModal, {
       // header: 'Iniciar sesión',
       width: '28rem',
+      breakpoints: {
+        '640px': '95vw'
+      },
       modal: true,
       dismissableMask: true,
       closable: true,

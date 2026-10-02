@@ -1,0 +1,67 @@
+.footer {
+  display: none; /* Oculto en pantallas medianas y grandes */
+
+  @media (max-width: 640px) {
+    /* 1. HACERLO STICKY */
+    display: block;
+    position: sticky;
+    bottom: 0;
+    z-index: 1000; /* Asegura que flote sobre el contenido del main */
+    width: 100%;
+
+    background-color: var(--snow);
+    border-top: 1px solid var(--c-border-light);
+    padding: 1rem 1.5rem;
+    /* margin-top: auto; -> Ya no es necesario con sticky */
+
+    &__container {
+      width: 100%;
+    }
+
+    &__nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      
+      /* 2. SEPARAR A IZQUIERDA Y DERECHA */
+      justify-content: space-around;
+      
+      /* Opcional: si creas subgrupos (ver HTML abajo), este gap se lo das a los subgrupos */
+      .nav-group {
+        display: flex;
+        gap: 1.5rem; /* Separación entre los links del mismo lado */
+        align-items: center;
+      }
+
+      .footer-link {
+        text-decoration: none;
+        color: var(--c-text-muted);
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.25rem 0;
+        position: relative;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: var(--c-text-main);
+        }
+
+        &.active {
+          color: var(--c-primary);
+          font-weight: 600;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--c-primary);
+            border-radius: 2px;
+          }
+        }
+      }
+    }
+  }
+}
