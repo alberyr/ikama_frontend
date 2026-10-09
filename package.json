@@ -5,9 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production --base-href=/ikama_frontend/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:ikama_frontend": "node dist/ikama_frontend/server/server.mjs"
+    "serve:ssr:ikama_frontend": "node dist/ikama_frontend/server/server.mjs",
+    "deploy": "npm run build:prod && npx angular-cli-ghpages --dir=dist/ikama_frontend/browser"
   },
   "private": true,
   "packageManager": "npm@11.12.0",
