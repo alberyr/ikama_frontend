@@ -33,20 +33,39 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      - name: Clean npm cache
-        run: npm cache clean --force
+      - name: Display environment info
+        run: |
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+          echo "Angular version in package.json:"
+          grep "@angular/core" package.json
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --verbose
+        continue-on-error: false
+
+      - name: Verify dependencies installed
+        run: |
+          echo "Checking @angular/core installation:"
+          ls -la node_modules/@angular/core/package.json || echo "NOT FOUND!"
+          echo "---"
+          npm list @angular/core @angular/cli
 
       - name: Build Angular app for production
         run: npm run build:prod
+        env:
+          NODE_ENV: production
 
       - name: Verify build output
         run: |
-          echo "Checking build output..."
-          ls -la dist/ikama_frontend/browser/
-          head -20 dist/ikama_frontend/browser/index.html
+          echo "=== Build Output Directory ==="
+          ls -la dist/ikama_frontend/browser/ | head -20
+          echo ""
+          echo "=== Index.html Content (first 30 lines) ==="
+          head -30 dist/ikama_frontend/browser/index.html
+          echo ""
+          echo "=== File Count ==="
+          find dist/ikama_frontend/browser -type f | wc -l
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
